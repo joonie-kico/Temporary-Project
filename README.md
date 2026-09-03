@@ -13,6 +13,7 @@ Detecting Persistent and Semantically Duplicate Job Postings Using Hybrid Inform
 3. historical dataset: https://www.kaggle.com/datasets/madhab/jobposts
 
 ## 2. Expected Architecture
+```
               Open-Apply
                  │
         Historical snapshots
@@ -37,3 +38,4 @@ Detecting Persistent and Semantically Duplicate Job Postings Using Hybrid Inform
                           │
                           ▼
                   Temporal patterns
+```
