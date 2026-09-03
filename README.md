@@ -1,10 +1,10 @@
 # Ghost Job Detector — Semantic Detection of Recurrent Job Postings
 
-Questions
+Questions  
 How effectively can lexical, semantic, and hybrid retrieval identify recurrent job postings across time?
 What temporal patterns characterize recurrent technology job postings?
 
-Purpose
+Purpose  
 Detecting Persistent and Semantically Duplicate Job Postings Using Hybrid Information Retrieval.
 
 ## 1. Data Source
