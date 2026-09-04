@@ -4,3 +4,4 @@
 - Created the project
 - Created README.md
 - Wrote a draft
+- Wrote a pilot analysis code
