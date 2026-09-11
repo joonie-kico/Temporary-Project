@@ -8,7 +8,7 @@ DATASET_PATH = (
 )
 
 START_DATE = "2026-07-20"
-END_DATE = "2026-07-27"
+END_DATE = "2026-07-21"
 
 TECH_KEYWORDS = [
     "software",
