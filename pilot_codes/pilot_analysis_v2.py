@@ -13,11 +13,11 @@ DATASET_PATH = (
 # -----------------------------
 # Analysis window
 # -----------------------------
-WARMUP_START = "2026-07-01"
-WARMUP_END = "2026-07-14"
+WARMUP_START = "2026-07-15"
+WARMUP_END = "2026-07-18"
 
-EVAL_START = "2026-07-15"
-EVAL_END = "2026-07-28"
+EVAL_START = "2026-07-19"
+EVAL_END = "2026-07-21"
 
 TECH_KEYWORDS = [
     "software",
@@ -78,18 +78,33 @@ def load_jobs():
 
     query = f"""
         SELECT
-            date,
-            id,
-            source_slug AS company,
-            title,
-            description_html,
-            locations,
-            posted_at
+            CAST(date AS VARCHAR) AS date,
+            CAST(id AS VARCHAR) AS id,
+            CAST(source_slug AS VARCHAR) AS company,
+            CAST(title AS VARCHAR) AS title,
+            CAST(description_html AS VARCHAR) AS description_html,
+            CAST(posted_at AS VARCHAR) AS posted_at
         FROM read_parquet(
             '{DATASET_PATH}',
             hive_partitioning = 1
         )
         WHERE date BETWEEN '{WARMUP_START}' AND '{EVAL_END}'
+        AND (
+            lower(title) LIKE '%software%'
+            OR lower(title) LIKE '%developer%'
+            OR lower(title) LIKE '%backend%'
+            OR lower(title) LIKE '%frontend%'
+            OR lower(title) LIKE '%full stack%'
+            OR lower(title) LIKE '%fullstack%'
+            OR lower(title) LIKE '%machine learning%'
+            OR lower(title) LIKE '%ml engineer%'
+            OR lower(title) LIKE '%ai engineer%'
+            OR lower(title) LIKE '%artificial intelligence%'
+            OR lower(title) LIKE '%data engineer%'
+            OR lower(title) LIKE '%data scientist%'
+            OR lower(title) LIKE '%devops%'
+            OR lower(title) LIKE '%cloud engineer%'
+        )
     """
 
     con = duckdb.connect()
@@ -103,8 +118,6 @@ def load_jobs():
 
 def preprocess(df):
     print("Filtering tech jobs...")
-
-    df = df[df["title"].apply(is_tech_job)].copy()
 
     print(f"Tech snapshot rows: {len(df):,}")
 
